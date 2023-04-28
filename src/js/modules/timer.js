@@ -1,4 +1,5 @@
 "use strict";
+import { saveToStorage } from "./tools";
 
 function manageTimer(selector, globalSettingsAndVars, pomoCounterSelector) {
 
@@ -105,7 +106,7 @@ function manageTimer(selector, globalSettingsAndVars, pomoCounterSelector) {
     function updatePomoCounter(step = 0) {
         globalSettingsAndVars.stats.total_pomos += step;
         pomoCounter.textContent = globalSettingsAndVars.stats.total_pomos;
-        localStorage.setItem('globalSettingsAndVars', JSON.stringify(globalSettingsAndVars));
+        saveToStorage(globalSettingsAndVars);
     }
 }   
 

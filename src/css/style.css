@@ -199,9 +199,6 @@ body {
     height: 15%;
     width: 100%;
     text-align: center;
-}
-
-.todo-list .task-title span {
     color: black;
     font-weight: bold;
     font-size: 30px;
@@ -235,17 +232,43 @@ body {
 
 .todo-list .task-content .task-list .task-list-item {
     min-height: 50px;
-    margin: 10px 0;
+    margin: 10px auto 0 auto;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    vertical-align: middle;
     border: 2px dashed black;
     border-radius: 6px;
-
-}
-
-.todo-list .task-content .task-list .task-list-item span {
     color: black;
     font-size: 18px;
+    font-weight: bold;
+}
+
+.todo-list .task-content .task-list .task-list-item span{
+    margin-left: 10px;
+}
+
+.todo-list .task-content .task-list .task-list-item button {
+    height: 30px;
+    width: 30px;
+    background: none;
+    border: none;
+    margin-right: 10px;
+    padding: 0px;
+    text-shadow: 1px 2px 1px black;
+    font-size: 25px;
+}
+
+.todo-list .task-content .task-list .task-list-item button:hover {
+    font-size: 26px;
+    text-shadow: none;
+}
+.todo-list .task-content .task-list .task-list-item.task-finished {
+    text-decoration: line-through;
+}
+
+.todo-list .task-content .task-list .task-list-item .task-complete-btn.active {
+    text-shadow: none;
 }
 
 
@@ -290,4 +313,95 @@ body {
 
 .control-stats .control-stats-wrapper .total-pomos {
     border-bottom-right-radius: 15px;
+}
+
+
+.task-add-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.task-add-wrapper.hide {
+    display: none;
+    
+}
+
+.task-add-content {
+    
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 480px;
+    height: 250px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #afd584;
+    backdrop-filter: blur(13%);
+    border: 3px dashed green;
+    border-radius: 15px;
+    box-shadow: 2px 2px 1px green, 4px 4px 1px green;
+    transform-origin: bottom left;
+    transition: 0.3s;
+}
+
+.task-add-content .task-add-content-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+#task-add-content-input {
+    width: 80%;
+    height: 50px;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 0 auto;
+    text-overflow: clip;
+    box-sizing:border-box;
+    font-size: 22px;
+}
+
+
+.task-add-content .task-add-btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.task-add-content .task-add-btn-wrapper button{
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+#task-add-btn-cancel {
+    background-color: rgb(186, 32, 32);
+    box-shadow: 0px 2px 2px white;
+    color: white;
+}
+
+#task-add-btn-cancel:hover {
+    background-color: rgb(121, 21, 21);
+    box-shadow: none;
+}
+
+#task-add-btn-submit {
+    box-shadow: 0px 2px 2px white;
+}
+
+#task-add-btn-submit:hover {
+    background-color: rgb(227, 223, 223);
+    box-shadow: none;
 }

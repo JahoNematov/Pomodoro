@@ -12,6 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "manageTimer": () => (/* binding */ manageTimer)
 /* harmony export */ });
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/js/modules/tools.js");
+
 
 
 function manageTimer(selector, globalSettingsAndVars, pomoCounterSelector) {
@@ -119,11 +121,211 @@ function manageTimer(selector, globalSettingsAndVars, pomoCounterSelector) {
     function updatePomoCounter(step = 0) {
         globalSettingsAndVars.stats.total_pomos += step;
         pomoCounter.textContent = globalSettingsAndVars.stats.total_pomos;
-        localStorage.setItem('globalSettingsAndVars', JSON.stringify(globalSettingsAndVars));
+        (0,_tools__WEBPACK_IMPORTED_MODULE_0__.saveToStorage)(globalSettingsAndVars);
     }
 }   
 
 
+
+/***/ }),
+
+/***/ "./src/js/modules/todo_list.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/todo_list.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "manageTasks": () => (/* binding */ manageTasks)
+/* harmony export */ });
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/js/modules/tools.js");
+
+
+
+function manageTasks(taskListSelector, addBtnSelector, modalSelector, taskCounterSelector, globalSettingsAndVars) {
+    const todoListContainer = document.querySelector(taskListSelector),
+          taskList = todoListContainer.querySelector(".task-list"),
+          addBtn = document.querySelector(addBtnSelector),
+          modalWrapper = document.querySelector(modalSelector),
+          taskCounter = document.querySelectorAll(taskCounterSelector)[1];
+    
+    updateTaskList();
+    manageTaskAddition();
+    
+
+    function updateTaskList() {
+        taskList.innerHTML = '';
+        globalSettingsAndVars.tasks.forEach(task => {
+            taskList.append(createListItem(task));
+        })
+        updateTaskCounter();
+        manageTaskListeners();
+    }
+
+    function createListItem(task) {
+        const elem = document.createElement("li"),
+              span = document.createElement('span'),
+              btnDiv = document.createElement('div'),
+              completeBtn = document.createElement("button"),
+              delBtn = document.createElement('button');
+
+        elem.classList.add("task-list-item");
+        btnDiv.classList.add("task-control-btns");
+        completeBtn.classList.add("task-complete-btn");
+        completeBtn.innerHTML = "&#9989;";
+        delBtn.classList.add("task-delete-btn");
+        delBtn.innerHTML = "&#10060";
+        
+        // Adding classes for completed tasks
+        if (task.isFinished) {
+            elem.classList.add("task-finished");
+            completeBtn.classList.add("active");
+        } else {
+            elem.classList.remove("task-finished");
+            completeBtn.classList.remove("active");
+        }
+        span.textContent = task.text;
+        
+        // Creating our element
+        btnDiv.append(completeBtn);
+        btnDiv.append(delBtn);
+        elem.append(span);
+        elem.append(btnDiv);
+        return elem; 
+    }
+
+    function manageTaskListeners() {
+        const completeBtns = taskList.querySelectorAll(".task-control-btns .task-complete-btn"),
+              deleteBtns = taskList.querySelectorAll('.task-control-btns .task-delete-btn');
+
+        completeBtns.forEach((btn, index) => {
+            btn.addEventListener('click', (event) => {
+                if (btn.classList.contains("active")) {    // if it was in completed state
+                    globalSettingsAndVars.tasks[index].isFinished = false;
+                } else {
+                    globalSettingsAndVars.tasks[index].isFinished = true;
+                }
+                (0,_tools__WEBPACK_IMPORTED_MODULE_0__.saveToStorage)(globalSettingsAndVars);
+                updateTaskList();
+            })
+        })
+
+        deleteBtns.forEach((btn, index) => {
+            btn.addEventListener("click", () => {
+                globalSettingsAndVars.tasks.splice(index, 1);
+                (0,_tools__WEBPACK_IMPORTED_MODULE_0__.saveToStorage)(globalSettingsAndVars);
+                updateTaskList();
+            })
+
+        })
+    }
+
+    function manageTaskAddition() {
+        const modalContent = modalWrapper.querySelector(".task-add-content"),
+              createBtn = document.querySelector("#task-add-btn-submit"),
+              inputField = document.querySelector("#task-add-content-input");
+
+        addBtn.addEventListener("click", () => {
+            modalWrapper.classList.remove('hide');
+            modalContent.classList.remove('hide');
+        })
+
+        modalWrapper.addEventListener("click", (e) => {
+            if (e.target.classList.contains("task-add-wrapper") || e.target.id === "task-add-btn-cancel") {
+                modalWrapper.classList.add('hide');
+                modalContent.classList.add('hide');
+            }
+        })
+
+        createBtn.addEventListener("click", () => {
+            addTask2List();
+        })
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === 'Enter' && !modalWrapper.classList.contains('hide')) {
+                addTask2List();
+            }
+        })
+
+        function addTask2List() {
+            globalSettingsAndVars.tasks.push({
+                text: inputField.value,
+                isFinished: false,
+            })
+            modalWrapper.classList.add('hide');
+            modalContent.classList.add('hide');
+            inputField.value = '';
+            (0,_tools__WEBPACK_IMPORTED_MODULE_0__.saveToStorage)(globalSettingsAndVars);
+            updateTaskList();
+            updateTaskCounter();
+        }
+    }
+
+    function updateTaskCounter() {
+            taskCounter.innerHTML = globalSettingsAndVars.tasks.length;
+    }
+}
+
+
+
+/***/ }),
+
+/***/ "./src/js/modules/tools.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/tools.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "loadGlobalVars": () => (/* binding */ loadGlobalVars),
+/* harmony export */   "saveToStorage": () => (/* binding */ saveToStorage)
+/* harmony export */ });
+
+
+    // Working with localStorage
+    function loadGlobalVars()  {
+        if (localStorage.getItem('globalSettingsAndVars') !== null) {
+            return JSON.parse(localStorage.getItem('globalSettingsAndVars'));
+        } else {
+    
+            let obj = {
+                timerValues: {
+                    pomo: 3,
+                    short: 300,
+                    long: 1800,
+                },
+                stats: {
+                    total_pomos: 0,
+                    total_tasks: 0,
+                },
+                tasks: [
+                    {
+                        text: 'Finish project',
+                        isFinished: false,
+                    },
+                    {
+                        text: 'Read articles',
+                        isFinished: false,
+                    },
+                    {
+                        text: 'Read articles',
+                        isFinished: false,
+                    }
+                ]
+            }
+            saveToStorage(obj);
+            return obj;
+    
+        }
+    }
+
+    function saveToStorage(obj) {
+        localStorage.setItem("globalSettingsAndVars", JSON.stringify(obj));
+    }
+
+    
 
 /***/ })
 
@@ -191,39 +393,25 @@ var __webpack_exports__ = {};
   \*************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
+/* harmony import */ var _modules_todo_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/todo_list */ "./src/js/modules/todo_list.js");
+/* harmony import */ var _modules_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/tools */ "./src/js/modules/tools.js");
+
+
 
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const globalSettingsAndVars = loadGlobalVars();
+    const globalSettingsAndVars = (0,_modules_tools__WEBPACK_IMPORTED_MODULE_2__.loadGlobalVars)();
+    
 
-    function loadGlobalVars()  {
-        if (localStorage.getItem('globalSettingsAndVars') !== null) {
-            return JSON.parse(localStorage.getItem('globalSettingsAndVars'));
-        } else {
-    
-            let obj = {
-                timerValues: {
-                    pomo: 3,
-                    short: 3,
-                    long: 1800,
-                },
-                stats: {
-                    total_pomos: 0,
-                    total_tasks: 0,
-                }
-            }
-    
-            localStorage.setItem("globalSettingsAndVars", JSON.stringify(obj));
-            return obj;
-    
-        }
-    }
+
+
     
     // Imported functionality
     (0,_modules_timer__WEBPACK_IMPORTED_MODULE_0__.manageTimer)('.tools', globalSettingsAndVars, ".control-stats .control-stats-wrapper .total-pomos span");
+    (0,_modules_todo_list__WEBPACK_IMPORTED_MODULE_1__.manageTasks)(".todo-list", ".btn-add-task", ".task-add-wrapper", ".total-tasks span", globalSettingsAndVars);
 })
 })();
 

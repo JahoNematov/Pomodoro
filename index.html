@@ -25,32 +25,32 @@
         <div class="timer"><span>25:00</span></div>
         <div class="start-btn"><button>START</button></div>
     </div>
-
     <div class="todo-list">
         <div class="task-title"><span>- TASKS -</span></div>
         
         <div class="task-content">
             <hr>
-            <ul class="task-list">
-                <li class="task-list-item"><input type="checkbox"><span>Finish work </span></li>
-                <li class="task-list-item"><div><input type="checkbox"><span>Do homework</span></li>
-                <!-- <li class="task-list-item"><input type="checkbox"><span>Do homework</span></li>
-                <li class="task-list-item"><input type="checkbox"><span>Do homework</span></li> -->
-            </ul>
-            <!-- <hr> -->
+            <ul class="task-list"></ul>
         </div>
     </div>
-
     <div class="control-stats">
         
         <div class="control-stats-wrapper">
-            <button class="btn-add-task">
-                <span>Add task</span>
-            </button>
+            <button class="btn-add-task">Add task</button>
             <div class="total-tasks"><span>Total tasks: </span><span>0</span></div>
             <div class="total-pomos"><span>Total Pomodoros: </span><span>0</span></div>
         </div>
     </div>
+    <div class="task-add-wrapper hide">
+        <div class="task-add-content hide">
+            <div class="task-add-content-title">Add new task</div>
+            <input id="task-add-content-input" type="input" placeholder="Put text here" maxlength="30" >
+            <div class="task-add-btn-wrapper">
+                <button id="task-add-btn-cancel">CANCEL</button>
+                <button id="task-add-btn-submit">ADD</button>
+            </div>
+    </div>
+</div>
 
     <script src = 'src/js/bundle.js'></script>
 </body>
