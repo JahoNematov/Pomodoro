@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href = 'src/css/style.css'>
+    <title>Pomodoro Timer</title>
+</head>
+<body>
+    <div class="nav">
+        <div class="logo"><span>Pomodoro</span></div>
+        <ul class="navbar">
+            <li><button class="btn-settings"><img src="src/img/setting.png"><span>Settings</span></button></li>
+            <li><button class="btn-about"><img src="src/img/info.png"><span>About</span></button></li>
+        </ul>
+    </div>
+    <div class="tools">
+        <div class="timer-btns">
+            <button id="pomo" class="timer-btn-item active"><span>Pomodoro</span></button>
+            <button id="short" class="timer-btn-item"><span>Short Break</span></button>
+            <button id="long" class="timer-btn-item"><span>Long break</span></button>
+        </div>
+        <div class="timer"><span>25:00</span></div>
+        <div class="start-btn"><button>START</button></div>
+    </div>
+
+    <div class="todo-list">
+        <div class="task-title"><span>- TASKS -</span></div>
+        
+        <div class="task-content">
+            <hr>
+            <ul class="task-list">
+                <li class="task-list-item"><input type="checkbox"><span>Finish work </span></li>
+                <li class="task-list-item"><div><input type="checkbox"><span>Do homework</span></li>
+                <!-- <li class="task-list-item"><input type="checkbox"><span>Do homework</span></li>
+                <li class="task-list-item"><input type="checkbox"><span>Do homework</span></li> -->
+            </ul>
+            <!-- <hr> -->
+        </div>
+    </div>
+
+    <div class="control-stats">
+        
+        <div class="control-stats-wrapper">
+            <button class="btn-add-task">
+                <span>Add task</span>
+            </button>
+            <div class="total-tasks"><span>Total tasks: </span><span>0</span></div>
+            <div class="total-pomos"><span>Total Pomodoros: </span><span>0</span></div>
+        </div>
+    </div>
+
+    <script src = 'src/js/index.js'></script>
+</body>
+</html>

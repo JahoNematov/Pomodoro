@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+@font-face {
+    font-family: "Fibon_Sans_Regular";
+    src: local("Fibon_Sans_Regular"),
+         url("../Fibon_Sans_Regular.otf") format("otf"),}
+
+
+body {
+    background-color: #e8e8e8;
+    font-family: 'Lato', sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Navigation */
+.nav {
+    width: 450px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.nav .logo {
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #272635;
+    font-weight: 900;
+    font-size: 28px;
+
+}
+
+.nav .logo:hover  {
+    text-decoration: underline;
+}
+
+.nav .navbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav .navbar li {
+    list-style-type: none;
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.nav .navbar li button {
+    display: flex;
+    justify-content: space-between;
+    background-color: #78bc2a;
+    max-width: 120px;
+    height: 35px;
+    border-style: none;
+    border-radius: 6px;
+    transition-duration: 0.2s;
+}
+
+.nav .navbar li button:hover {
+    background-color: #588a1f;
+}
+
+.nav .navbar li button span {
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.nav .navbar li button img {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 4px;;
+    height: 16px;
+    width: 16px;
+    filter: invert(100%);
+}
+
+
+/* Tools */
+.tools {
+    background-color: #8b80f9;
+    width: 450px;
+    margin: 0 auto;
+    border-radius: 8px;
+    height: 270px;
+}
+
+.tools .timer-btns {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 350px;
+    
+}
+
+.tools .timer-btns .timer-btn-item {
+    width: 100px;
+    height: 35px;
+    margin-top: 15px;
+    border-style: hidden;
+    border-radius: 6px;
+    background-color: #272635;
+    box-shadow: 2px 2px 10px #dfdfdf;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    color: white;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.tools .timer-btns .timer-btn-item:hover {
+    background-color: #4d478c;
+    box-shadow: none;
+    border: 3px solid #272635;
+}
+
+.tools .timer-btns .disabled {
+    background-color: rgb(169, 166, 166);
+}
+
+.tools .timer-btns .disabled:hover {
+    background-color: rgb(169, 166, 166);
+}
+
+.tools .timer-btns .active {
+    background-color: #4d478c;
+    box-shadow: none;
+    border: 3px solid #272635;
+}
+
+
+/* Timer */
+.tools .timer {
+    display: flex;
+    justify-content: center;
+    margin: 15px auto;
+}
+
+.tools .timer span{
+    color: black;
+    font-weight: bold;
+    font-size: 100px;
+}
+
+/* Start Button */
+.tools .start-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.tools .start-btn button {
+    width: 200px;
+    height: 50px;
+    border-style: hidden;
+    border-radius: 14px;
+    background-color: #272635;
+    box-shadow: 2px 2px 10px #dfdfdf;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.tools .start-btn button:hover {
+    background-color: #4d478c;
+    box-shadow: none;
+    border: 3px solid #272635;
+}
+
+.tools .start-btn .active {
+    background-color: rgb(178, 34, 34);
+}
+
+.tools .start-btn .active:hover {
+    background-color: rgb(237, 43, 43);
+}
+
+
+/* todo-list */
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    background-color: #8b80f9;
+    width: 450px;
+    margin: 10px auto 0 auto;
+    border-radius: 8px;
+    height: 260px;
+}
+
+.todo-list .task-title {
+    margin: 5px auto;
+    height: 15%;
+    width: 100%;
+    text-align: center;
+}
+
+.todo-list .task-title span {
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.todo-list .task-content {
+    margin: 10px auto;
+    height: 90%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: none;
+
+}
+
+.todo-list .task-content hr {
+    width: 90%;
+    bottom: 0;
+    top: 0;
+    position: sticky;
+    margin: 0 auto;
+    border: 1px solid black;
+    box-shadow: 0px 0px 3px black;
+}
+
+.todo-list .task-content .task-list {
+    padding: 0px;
+    margin: 0 auto;
+    width: 90%;
+    list-style-type: none;
+}
+
+.todo-list .task-content .task-list .task-list-item {
+    min-height: 50px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    border: 2px dashed black;
+    border-radius: 6px;
+
+}
+
+.todo-list .task-content .task-list .task-list-item span {
+    color: black;
+    font-size: 18px;
+}
+
+
+/* Add button and statistics */
+.control-stats {
+    width: 450px;
+    margin: 0 auto 0 auto;
+}
+
+.control-stats .control-stats-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.control-stats .control-stats-wrapper div {
+    background-color: #272635;
+    color: white;
+    padding: 10px;
+}
+
+.control-stats .control-stats-wrapper button {
+    background-color: #78bc2a;
+    border: 3px solid #4d791b;
+    border-bottom-left-radius: 15px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 0 20px 0 20px;
+    transition-duration: 0.2s;
+}
+
+.control-stats .control-stats-wrapper button:hover {
+    background-color: #66a024;
+}
+
+.control-stats .control-stats-wrapper .total-tasks {
+    margin-right: 1px;
+    margin-left: 1px;
+}
+
+.control-stats .control-stats-wrapper .total-pomos {
+    border-bottom-right-radius: 15px;
+}
